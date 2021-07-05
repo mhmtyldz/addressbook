@@ -3,11 +3,11 @@
     ViewData["Title"] = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var firms = ViewBag.Firms as List<FirmListViewModel>;
-    var a = 1;
+    var locations = ViewBag.Locations as List<LocationListViewModel>;
 }
 
 <div class="main-content">
-    <form class="row" asp-route="/contact/ekle"
+    <form class="row" asp-route="/contact/add"
           asp-all-route-data-ajax-failure="onFailed"
           data-ajax-success="onSuccess"
           data-ajax-begin="onBegin"
@@ -19,16 +19,54 @@
                 <h4 class="card-title"><strong>Contacts Add</strong></h4>
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-md-8">
-                            <label class="text-fader">Frrm</label>
+                        <div class="form-group col-md-12">
+                            <label class="text-fader">Firm</label>
                             <select class="form-control" asp-for="FirmId" data-provide="selectpicker">
+                                <option value="">Select Firm</option>
                                 @foreach (var firm in firms)
                                 {
-                                    <option selected="selected" value="@firm.Id">@firm.Name</option>
+                                    <option value="@firm.Id">@firm.Name</option>
                                 }
                             </select>
+                            <span asp-validation-for="FirmId" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-6">
+                            <label class="text-fader">Name</label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-fader">Lastname</label>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="text-fader">Location</label>
+                            <select class="form-control" asp-for="LocationId" data-provide="selectpicker">
+                                <option value="">Select Location</option>
+                                @foreach (var location in locations)
+                                {
+                                    <option value="@location.Id">@location.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="LocationId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-fader">Phone Number</label>
+                            <input type="text" asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-fader">Email Address</label>
+                            <input type="email" asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="text-fader">Content Of Info</label>
+                            <textarea cols="6" asp-for="ContentOfInfo" class="form-control"></textarea>
+                            <span asp-validation-for="ContentOfInfo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-12">
                             <button class="btn btn-primary pull-right"> Save</button>
                         </div>
                     </div>
@@ -45,17 +83,17 @@
         }
         var onSuccess = function (response) {
             $.LoadingOverlay("hide");
-            if (response.success) {
+            if (response) {
                 Swal.fire(
                     'Başarılı',
-                    response.message,
+                    "Contact was added successfully",
                     'success'
                 )
             }
             else {
                 Swal.fire(
                     'Hata!',
-                    response.message,
+                    'An error occurred while adding the contact',
                     'error'
                 )
             }

@@ -21,13 +21,16 @@ namespace AddressBook.UI.Controllers
         public async Task<IActionResult> Add()
         {
             var firms =await _contactService.GetFirmList();
+            var locations =await _contactService.GetLocationList();
             ViewBag.Firms = firms;
+            ViewBag.Locations = locations;
             return View();
         }
         [HttpPost]
-        public IActionResult Add(AddressBookCreateRequest request)
+        public async Task<IActionResult> Add(AddressBookCreateRequest request)
         {
-            return View();
+            var response =await _contactService.ContactCreate(request);
+            return Json(response);
         }
     }
 }

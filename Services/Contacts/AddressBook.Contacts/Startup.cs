@@ -33,8 +33,12 @@ namespace AddressBook.Contacts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            services.AddScoped<IContactService, ContactManager>();
+            services.AddScoped<IContactDataAccess, ContactDataAccess>();
             services.AddScoped<IFirmService, FirmManager>();
             services.AddScoped<IFirmDataAccess, FirmDataAccess>();
+            services.AddScoped<ILocationService, LocationManager>();
+            services.AddScoped<ILocationDataAccess, LocationDataAccess>();
             services.AddDbContext<AddressBookDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>

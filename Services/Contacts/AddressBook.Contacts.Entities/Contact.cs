@@ -19,11 +19,9 @@ namespace AddressBook.Contacts.Entities
         public string Name { get; set; }
         public string LastName { get; set; }
         public int FirmId { get; set; }
-        public int ContactInformationId { get; set; }
 
         [ForeignKey("FirmId")]
         public Firm Firm { get; set; }
-        [ForeignKey("ContactInformationId")]
-        public ContactInformation ContactInformation { get; set; }
+      
     }
 }

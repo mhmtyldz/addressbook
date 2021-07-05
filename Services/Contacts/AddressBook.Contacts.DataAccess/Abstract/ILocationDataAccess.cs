@@ -1,5 +1,4 @@
 ﻿using AddressBook.Contacts.Entities;
-using AddressBook.Shared.Models.Request;
 using AddressBook.Shared.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Contacts.DataAccess.Abstract
 {
-    public interface IContactDataAccess : IRepository<Contact>
+    public interface ILocationDataAccess : IRepository<Location>
     {
-        Task<bool> CreateContact(AddressBookCreateRequest request);
     }
 }

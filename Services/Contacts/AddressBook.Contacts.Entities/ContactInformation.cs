@@ -13,9 +13,11 @@ namespace AddressBook.Contacts.Entities
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public string ContentOfInfo { get; set; }
+        public Guid ContactId { get; set; }
         [ForeignKey("LocationId")]
         public int LocationId { get; set; }
         public Location Location { get; set; }
+        [ForeignKey("ContactId")]
         public Contact Contact { get; set; }
     }
 }

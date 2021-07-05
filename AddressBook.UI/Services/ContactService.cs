@@ -1,4 +1,5 @@
-﻿using AddressBook.Shared.ViewModel;
+﻿using AddressBook.Shared.Models.Request;
+using AddressBook.Shared.ViewModel;
 using AddressBook.UI.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,27 +17,38 @@ namespace AddressBook.UI.Services
         {
             _httpClient = httpClient;
         }
+
+        public async Task<bool> ContactCreate(AddressBookCreateRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync("contacts", request);
+            return await response.Content.ReadFromJsonAsync<bool>(); ;
+        }
+
         public async Task<List<FirmListViewModel>> GetFirmList()
         {
-            try
+
+            var response = await _httpClient.GetAsync($"firms");
+
+            if (!response.IsSuccessStatusCode)
             {
-                var response = await _httpClient.GetAsync($"firms");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return null;
-                }
-
-                var discount = await response.Content.ReadFromJsonAsync<List<FirmListViewModel>>();
-
-                return discount;
+                return null;
             }
-            catch (Exception ex)
+
+            var firms = await response.Content.ReadFromJsonAsync<List<FirmListViewModel>>();
+
+            return firms;
+        }
+
+        public async Task<List<LocationListViewModel>> GetLocationList()
+        {
+            var response = await _httpClient.GetAsync($"locations");
+
+            if (!response.IsSuccessStatusCode)
             {
-
-                throw;
+                return null;
             }
-           
+            var locations = await response.Content.ReadFromJsonAsync<List<LocationListViewModel>>();
+            return locations;
         }
     }
 }

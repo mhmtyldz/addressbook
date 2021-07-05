@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddressBook.Contacts.Services.Concrete
+namespace AddressBook.Shared.ViewModel
 {
-    public class ContactService
+    public class ContactCreateViewModel
     {
+        public int Id { get; set; }
     }
 }

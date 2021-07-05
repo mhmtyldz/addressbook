@@ -5,8 +5,6 @@ namespace AddressBook.Contacts.Services.Abstract
 {
     public interface IContactService
     {
-        Task Add(AddressBookCreateRequest request);
-        Task Update();
-        Task Delete(string id);
+        Task<bool> Create(AddressBookCreateRequest request);
     }
 }
