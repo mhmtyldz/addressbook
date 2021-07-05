@@ -11,6 +11,10 @@ namespace AddressBook.UI.Services.Interfaces
     {
         Task<List<FirmListViewModel>> GetFirmList();
         Task<List<LocationListViewModel>> GetLocationList();
+        Task<List<ContactListViewModel>> GetContactList();
+        Task<ContactDetailViewModel> GetContactDetail(string id);
+        Task<bool> DeleteContact(string id);
         Task<bool> ContactCreate(AddressBookCreateRequest request);
+        Task<bool> UpdateContact(UpdateContactRequest request);
     }
 }

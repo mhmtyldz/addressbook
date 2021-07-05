@@ -32,5 +32,32 @@ namespace AddressBook.UI.Controllers
             var response =await _contactService.ContactCreate(request);
             return Json(response);
         }
+
+        [HttpGet]
+        [Route("/contact/list")]
+        public async Task<IActionResult> List()
+        {
+            var result = await _contactService.GetContactList();
+            return View(result);
+        }
+        [HttpGet]
+        [Route("/contact/getdetail")]
+        public async Task<IActionResult> ContactDetail(string id)
+        {
+            var result = await _contactService.GetContactDetail(id);
+            return Json(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteContact(string id)
+        {
+            var result = await _contactService.DeleteContact(id);
+            return Json(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateContact(UpdateContactRequest request)
+        {
+            var result = await _contactService.UpdateContact(request);
+            return Json(result);
+        }
     }
 }

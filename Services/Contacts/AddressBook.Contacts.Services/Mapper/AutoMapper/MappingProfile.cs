@@ -16,6 +16,7 @@ namespace AddressBook.Contacts.Services.Mapper.AutoMapper
         {
             CreateMap<Firm, FirmListViewModel>().ReverseMap();
             CreateMap<Location, LocationListViewModel>().ReverseMap();
+            CreateMap<Contact, ContactDetailViewModel>().ReverseMap();
         }
     }
 }

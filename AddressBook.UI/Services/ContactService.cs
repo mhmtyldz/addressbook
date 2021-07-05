@@ -21,7 +21,41 @@ namespace AddressBook.UI.Services
         public async Task<bool> ContactCreate(AddressBookCreateRequest request)
         {
             var response = await _httpClient.PostAsJsonAsync("contacts", request);
-            return await response.Content.ReadFromJsonAsync<bool>(); ;
+            return await response.Content.ReadFromJsonAsync<bool>(); 
+        }
+
+        public async Task<bool> DeleteContact(string id)
+        {
+            var response = await _httpClient.DeleteAsync($"contacts/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<ContactDetailViewModel> GetContactDetail(string id)
+        {
+            var response = await _httpClient.GetAsync($"contacts/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var firms = await response.Content.ReadFromJsonAsync<ContactDetailViewModel>();
+
+            return firms;
+        }
+
+        public async Task<List<ContactListViewModel>> GetContactList()
+        {
+            var response = await _httpClient.GetAsync($"contacts");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var firms = await response.Content.ReadFromJsonAsync<List<ContactListViewModel>>();
+
+            return firms;
         }
 
         public async Task<List<FirmListViewModel>> GetFirmList()
@@ -49,6 +83,12 @@ namespace AddressBook.UI.Services
             }
             var locations = await response.Content.ReadFromJsonAsync<List<LocationListViewModel>>();
             return locations;
+        }
+
+        public async Task<bool> UpdateContact(UpdateContactRequest request)
+        {
+            var response = await _httpClient.PutAsJsonAsync("contacts", request);
+            return await response.Content.ReadFromJsonAsync<bool>(); 
         }
     }
 }

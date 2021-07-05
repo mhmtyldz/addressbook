@@ -22,6 +22,6 @@ namespace AddressBook.Contacts.Entities
 
         [ForeignKey("FirmId")]
         public Firm Firm { get; set; }
-      
+        public ContactInformation ContactInformation { get; set; }
     }
 }

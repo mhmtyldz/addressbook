@@ -23,5 +23,25 @@ namespace AddressBook.Contacts.Controllers
         {
             return Ok(await _contactService.Create(request));
         }
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateContactRequest request)
+        {
+            return Ok(await _contactService.Update(request));
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            return Ok(await _contactService.Delete(id));
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _contactService.GetAll());
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetContact(string id)
+        {
+            return Ok(await _contactService.GetContact(id));
+        }
     }
 }
