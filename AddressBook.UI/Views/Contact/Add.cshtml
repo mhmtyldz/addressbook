@@ -1,0 +1,67 @@
+﻿@model AddressBookCreateRequest
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var firms = ViewBag.Firms as List<FirmListViewModel>;
+    var a = 1;
+}
+
+<div class="main-content">
+    <form class="row" asp-route="/contact/ekle"
+          asp-all-route-data-ajax-failure="onFailed"
+          data-ajax-success="onSuccess"
+          data-ajax-begin="onBegin"
+          data-ajax="true"
+          data-ajax-method="POST"
+          enctype="multipart/form-data">
+        <div class="col-lg-12">
+            <div class="card">
+                <h4 class="card-title"><strong>Contacts Add</strong></h4>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label class="text-fader">Frrm</label>
+                            <select class="form-control" asp-for="FirmId" data-provide="selectpicker">
+                                @foreach (var firm in firms)
+                                {
+                                    <option selected="selected" value="@firm.Id">@firm.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <button class="btn btn-primary pull-right"> Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        var onFailed = function () {
+            $.LoadingOverlay("hide");
+        }
+        var onSuccess = function (response) {
+            $.LoadingOverlay("hide");
+            if (response.success) {
+                Swal.fire(
+                    'Başarılı',
+                    response.message,
+                    'success'
+                )
+            }
+            else {
+                Swal.fire(
+                    'Hata!',
+                    response.message,
+                    'error'
+                )
+            }
+        }
+        var onBegin = function () {
+            $.LoadingOverlay("show");
+        }
+    </script>
+}

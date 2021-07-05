@@ -7,17 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contacts", "Contacts", "{9AA73DD8-CF64-48AB-8552-08E7C7AABD96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Contacts", "Services\Contacts\AddressBook.Contacts\AddressBook.Contacts.csproj", "{10D46B3B-B5EB-42AB-808A-14B6D7F20EAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Contacts", "Services\Contacts\AddressBook.Contacts\AddressBook.Contacts.csproj", "{10D46B3B-B5EB-42AB-808A-14B6D7F20EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Contacts.Services", "Services\Contacts\AddressBook.Contacts.Services\AddressBook.Contacts.Services.csproj", "{31226D25-F148-425B-9336-3AEC3359025D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Contacts.Services", "Services\Contacts\AddressBook.Contacts.Services\AddressBook.Contacts.Services.csproj", "{31226D25-F148-425B-9336-3AEC3359025D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Contacts.DataAccess", "Services\Contacts\AddressBook.Contacts.DataAccess\AddressBook.Contacts.DataAccess.csproj", "{F982004B-91EC-41F0-9913-59554DCFDAFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Contacts.DataAccess", "Services\Contacts\AddressBook.Contacts.DataAccess\AddressBook.Contacts.DataAccess.csproj", "{F982004B-91EC-41F0-9913-59554DCFDAFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Shared", "AddressBook.Shared\AddressBook.Shared.csproj", "{86B940C9-ED43-4AF0-969E-3A4A1DF22661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Shared", "AddressBook.Shared\AddressBook.Shared.csproj", "{86B940C9-ED43-4AF0-969E-3A4A1DF22661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Contacts.Common", "Services\Contacts\AddressBook.Contacts.Common\AddressBook.Contacts.Common.csproj", "{0B799A2E-C293-4225-AE98-13EF4254108F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Contacts.Common", "Services\Contacts\AddressBook.Contacts.Common\AddressBook.Contacts.Common.csproj", "{0B799A2E-C293-4225-AE98-13EF4254108F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Contacts.Entities", "Services\Contacts\AddressBook.Contacts.Entities\AddressBook.Contacts.Entities.csproj", "{7342C67B-7B91-4696-AB0E-D9A26823B457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Contacts.Entities", "Services\Contacts\AddressBook.Contacts.Entities\AddressBook.Contacts.Entities.csproj", "{7342C67B-7B91-4696-AB0E-D9A26823B457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.UI", "AddressBook.UI\AddressBook.UI.csproj", "{B9863FEC-FDF7-4201-A54F-0E33C087BE3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{127623B2-FBA7-4741-9C47-016371B4F484}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Ocelot.Gateways", "Gateways\AddressBook.Ocelot.Gateways\AddressBook.Ocelot.Gateways.csproj", "{F09F9156-32CF-41A5-ADF7-1D566B4AD905}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{7342C67B-7B91-4696-AB0E-D9A26823B457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7342C67B-7B91-4696-AB0E-D9A26823B457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7342C67B-7B91-4696-AB0E-D9A26823B457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9863FEC-FDF7-4201-A54F-0E33C087BE3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9863FEC-FDF7-4201-A54F-0E33C087BE3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9863FEC-FDF7-4201-A54F-0E33C087BE3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9863FEC-FDF7-4201-A54F-0E33C087BE3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F09F9156-32CF-41A5-ADF7-1D566B4AD905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09F9156-32CF-41A5-ADF7-1D566B4AD905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09F9156-32CF-41A5-ADF7-1D566B4AD905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09F9156-32CF-41A5-ADF7-1D566B4AD905}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +74,7 @@ Global
 		{F982004B-91EC-41F0-9913-59554DCFDAFC} = {9AA73DD8-CF64-48AB-8552-08E7C7AABD96}
 		{0B799A2E-C293-4225-AE98-13EF4254108F} = {9AA73DD8-CF64-48AB-8552-08E7C7AABD96}
 		{7342C67B-7B91-4696-AB0E-D9A26823B457} = {9AA73DD8-CF64-48AB-8552-08E7C7AABD96}
+		{F09F9156-32CF-41A5-ADF7-1D566B4AD905} = {127623B2-FBA7-4741-9C47-016371B4F484}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A38D09DA-E0FD-4C7A-8156-37A727F7988B}

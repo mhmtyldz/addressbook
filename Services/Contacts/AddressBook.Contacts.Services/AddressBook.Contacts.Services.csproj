@@ -4,4 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AddressBook.Shared\AddressBook.Shared.csproj" />
+    <ProjectReference Include="..\AddressBook.Contacts.DataAccess\AddressBook.Contacts.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

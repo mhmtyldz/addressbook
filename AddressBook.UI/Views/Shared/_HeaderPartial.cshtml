@@ -1,0 +1,25 @@
+﻿
+<header class="topbar">
+    <div class="topbar-left">
+        <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-divider"></div>
+        <ul class="topbar-btns">
+            <li class="dropdown">
+                <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="../assets/img/avatar/1.jpg" alt="..."></span>
+                <div class="dropdown-menu dropdown-menu-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="dropdown-item" href="/Account/Logout"><i class="ti-power-off"></i> @User.Claims.First(x => x.Type == "name").Value</a>
+                    }
+                    else
+                    {
+                        <a class="dropdown-item" href="/Account/Login"><i class="ti-power-off"></i> Giriş Yap</a>
+                    }
+                </div>
+            </li>
+        </ul>
+        <div class="topbar-divider"></div>
+    </div>
+</header>

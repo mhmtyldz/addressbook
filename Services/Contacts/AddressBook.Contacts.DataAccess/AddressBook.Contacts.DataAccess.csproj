@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\AddressBook.Shared\AddressBook.Shared.csproj" />
+    <ProjectReference Include="..\AddressBook.Contacts.Entities\AddressBook.Contacts.Entities.csproj" />
   </ItemGroup>
 
 </Project>

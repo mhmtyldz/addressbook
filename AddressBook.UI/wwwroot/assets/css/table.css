@@ -1,0 +1,481 @@
+﻿.table .btn-secondary {
+    color: #fff;
+    background-color: #4682b4;
+    border-color: #4682b4;
+}
+
+.close:hover {
+    color: #26cabb;
+    text-decoration: none;
+}
+
+.modal {
+    overflow: auto !important;
+}
+
+.pasifRow {
+    opacity: 0.3;
+}
+
+/*table button css*/
+#example_wrapper .flexcontent {
+    width: 50%;
+    display: block;
+    float: left;
+}
+
+#example_wrapper :after, :before {
+    box-sizing: border-box;
+}
+
+#example_wrapper .btn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+#example_wrapper .btn-app {
+    color: white !important;
+    box-shadow: none;
+    border-radius: 3px;
+    position: relative;
+    padding: 2px;
+    margin: 0;
+    min-width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    font-size: 10px;
+    transition: all .2s;
+    background-color: steelblue !important;
+}
+
+    #example_wrapper .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+        font-size: 16px;
+        display: block;
+    }
+
+    #example_wrapper .btn-app:hover {
+        border-color: #aaa;
+        transform: scale(1.1);
+    }
+
+#example_wrapper .pdf {
+    background-color: #dc2f2f !important;
+}
+
+#example_wrapper .excel {
+    background-color: #3ca23c !important;
+}
+
+#example_wrapper .csv {
+    background-color: #e86c3a !important;
+}
+
+#example_wrapper .imprimir {
+    background-color: #8766b1 !important;
+}
+
+#example_wrapper .selectTable {
+    height: 40px;
+    float: right;
+}
+
+#example_wrapper div.dataTables_wrapper div.dataTables_filter {
+    text-align: left;
+    margin-top: 15px;
+}
+
+#example_wrapper .btn-secondary {
+    color: #fff;
+    background-color: #4682b4;
+    border-color: #4682b4;
+}
+
+    #example_wrapper .btn-secondary:hover {
+        color: #fff;
+        background-color: #315f86;
+        border-color: #545b62;
+    }
+
+
+#example_wrapper .titulo-tabla {
+    color: #606263;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+
+#example_wrapper .inline {
+    display: inline-block;
+    padding: 0;
+}
+
+/*table button css*/
+
+.paginate_button.page-item {
+    border: none;
+    border-radius: 5px;
+}
+
+#cbp-spmenu-s3 a {
+    color: white;
+}
+
+.paginate_button.page-item.active {
+    border: none;
+    border-radius: 5px;
+}
+
+.paginate_button.page-item a {
+    font-size: 15px;
+    background: none !important;
+    border-radius: 5px !important;
+    font-weight: 700;
+}
+
+.paginate_button.page-item.active a {
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    background: #167f92 !important;
+    border-radius: 5px !important;
+    border: none;
+}
+
+.tooltip > .tooltip-inner {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+#example tbody td {
+    font-size: 15px;
+    padding: 10px !important;
+}
+
+    #example tbody td a {
+        font-size: 16px;
+        cursor: pointer !important;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        margin: 0px;
+    }
+
+    #example tbody td button {
+        font-size: 16px;
+        cursor: pointer !important;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+#example thead tr th:hover {
+    cursor: pointer;
+}
+
+#example tbody td a i {
+    font-size: 18px !important;
+    padding: 5px;
+}
+
+#example tbody td button i {
+    font-size: 18px !important;
+    padding: 5px;
+}
+
+.btn-float {
+    display: -webkit-inline-box;
+    cursor: pointer !important;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 80px !important;
+    height: 40px !important;
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+.fab-fixed {
+    position: absolute;
+    height: 45px !important;
+    right: 5px;
+    top: 5px;
+    z-index: 991;
+}
+
+label {
+    text-align: left;
+    font-size: 16px;
+    color: #8b95a5;
+    font-weight: 300 !important;
+    border-color: #ced4da !important;
+}
+
+
+.card-header {
+    padding: 10px !important;
+}
+
+
+    .card-header h3 {
+        margin: 0px !important;
+    }
+
+#example_filter {
+    float: right;
+    margin: 10px 0 0px 15px;
+    width: 300px;
+}
+
+    #example_filter label {
+        width: 100%;
+    }
+
+        #example_filter label input {
+            width: 230px;
+            float: right;
+        }
+
+#Save {
+    background-color: #167f92;
+    border-color: #167f92;
+    border-radius: 5px;
+    color: #fff;
+}
+
+    #Save:hover {
+        background-color: #2a3f54;
+        border-color: #2a3f54;
+        cursor: pointer;
+    }
+
+
+#example_length {
+    float: left;
+    margin: 10px 15px 0px 15px;
+}
+
+    #example_length select.custom-select.custom-select-sm.form-control.form-control-sm {
+        float: right;
+        width: 50px;
+        margin: 0 10px;
+    }
+
+    #example_filter .form-control:focus, #example_length .form-control:focus {
+        border-color: #83e0d7;
+        -webkit-box-shadow: 0px 1px 7px 0px #33cabb !important;
+        box-shadow: 0px 1px 7px 0px #33cabb !important;
+    }
+
+.table.table-striped {
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    border-radius: 3px;
+}
+
+    .table.table-striped tr {
+        border: 1px solid #d9e4e6;
+    }
+
+        .table.table-striped tr:nth-child(odd) {
+            background-color: #eaf3f3;
+        }
+
+#example th {
+    text-align: center;
+    min-height: 52px;
+    height: 100%
+}
+
+
+    #example th:last-child:before,
+    #example th:last-child:after {
+        display: none;
+    }
+
+.table.table-striped th {
+    font-size: 15px;
+    display: none;
+    border: 1px solid #fff;
+    background-color: #167f92;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+}
+
+    .table.table-striped th:first-child {
+        text-align: center;
+        display: table-cell;
+    }
+
+    .table.table-striped th:nth-child(2) {
+        text-align: center;
+        display: table-cell;
+    }
+
+        .table.table-striped th:nth-child(2) span {
+            display: none;
+        }
+
+        .table.table-striped th:nth-child(2):after {
+            content: attr(data-th);
+        }
+
+    .table.table-striped th:nth-last-child(-n+4):before,
+    .table.table-striped th:nth-last-child(-n+4):after {
+        display: none;
+    }
+
+.table.table-striped td {
+    display: block;
+    word-wrap: break-word;
+}
+
+    .table.table-striped td:first-child {
+        display: table-cell;
+        vertical-align: middle;
+        border-right: 1px solid #d9e4e6;
+    }
+
+.table.table-striped th, .table.table-striped td {
+    text-align: left;
+    vertical-align: middle;
+    margin: 0.5em 1em;
+}
+
+@media (min-width: 480px) {
+    .table.table-striped th:nth-child(2) span {
+        display: block;
+    }
+
+
+    .table.table-striped td {
+        vertical-align: middle;
+        border: 1px solid #d9e4e6;
+    }
+
+    .table.table-striped th, .table.table-striped td {
+        display: table-cell;
+        padding: 15px 10px;
+        vertical-align: middle;
+    }
+
+    #example tbody td a:hover i {
+        color: #2a3f54;
+    }
+
+    #example tbody th:hover {
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 1180px) and (max-width: 1450px) {
+    .table.table-striped th, #example tbody td, .paginate_button.page-item a, .paginate_button.page-item.active a {
+        font-size: 12px;
+    }
+
+        #example tbody td a i {
+            font-size: 15px !important;
+        }
+
+    .table.table-striped th, .table.table-striped td {
+        padding: 15px 3px;
+    }
+}
+
+.btn.btn-primary.btn-xs.active {
+    background: white !important;
+}
+
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+    color: #2a3f54 !important;
+}
+
+.media.align-items-center {
+    border-radius: 0px;
+}
+
+    .media.align-items-center.selected {
+        background: #33cabb !important;
+        border: 1px solid;
+    }
+
+
+
+#imagesModalCenter #visitorImages .col-md-3 {
+    min-height: 195px;
+}
+
+.toDoTable.active {
+    background-color: #a7eae3 !important;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+
+    .btn-float {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 18px !important;
+        margin-top: 20px !important;
+    }
+
+    .card-body {
+        padding: 5px !important;
+    }
+
+    table.filterTable {
+        overflow: auto;
+        display: block;
+        width: 100%;
+    }
+
+    #visitorsCard .fab.fab-fixed {
+        padding: 0px !important;
+        top: -10px !important;
+    }
+
+    .dt-buttons {
+        position: relative !important;
+        right: 0px !important;
+        left: 0px !important;
+        top: 0 !important;
+        float: left !important;
+    }
+
+    #example_filter {
+        position: relative !important;
+        right: 0 !important;
+        top: 0 !important;
+    }
+
+        #example_filter label {
+            width: 70% !important;
+        }
+
+            #example_filter label input {
+                width: 84% !important;
+            }
+}
