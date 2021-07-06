@@ -8,7 +8,7 @@ namespace AddressBook.Contacts.Services.Abstract
 {
     public interface IContactService
     {
-        Task<bool> Create(AddressBookCreateRequest request);
+        Task<AddressBookCreateViewModel> Create(AddressBookCreateRequest request);
         Task<bool> Update(UpdateContactRequest request);
         Task<bool> Delete(string id);
         Task<List<ContactListViewModel>> GetAll();

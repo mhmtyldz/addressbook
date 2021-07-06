@@ -21,7 +21,7 @@ namespace AddressBook.Contacts.Services.Concrete
             _contactDataAccess = contactDataAccess;
             _mapper = mapper;
         }
-        public async Task<bool> Create(AddressBookCreateRequest request)
+        public async Task<AddressBookCreateViewModel> Create(AddressBookCreateRequest request)
         {
             return await _contactDataAccess.CreateContact(request);
         }

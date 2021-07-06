@@ -23,9 +23,9 @@ namespace AddressBook.Contacts.DataAccess.Concrete
             _context = context;
         }
 
-        public async Task<bool> CreateContact(AddressBookCreateRequest request)
+        public async Task<AddressBookCreateViewModel> CreateContact(AddressBookCreateRequest request)
         {
-            var result = false;
+            var result = new AddressBookCreateViewModel();
 
             using (var transaction = _context.Database.BeginTransaction())
             {
@@ -54,7 +54,8 @@ namespace AddressBook.Contacts.DataAccess.Concrete
                         if (addedContactInfo != null && addedContactInfo.Entity != null)
                         {
                             transaction.Commit();
-                            result = true;
+                            result.ContactId = contactInfo.ContactId.ToString();
+                            result.LocationId = contactInfo.LocationId;
                         }
                     }
 
@@ -81,7 +82,7 @@ namespace AddressBook.Contacts.DataAccess.Concrete
                 {
                     var uuid = Guid.Parse(id);
                     var contactInfo = await _context.ContactInformation.FirstOrDefaultAsync(x => x.ContactId == uuid);
-                    if (contactInfo!=null)
+                    if (contactInfo != null)
                     {
                         var deletedContactInfo = _context.ContactInformation.Remove(contactInfo);
 
@@ -103,7 +104,7 @@ namespace AddressBook.Contacts.DataAccess.Concrete
                         transaction.Commit();
                         result = true;
                     }
-                   
+
 
                 }
                 catch (Exception ex)

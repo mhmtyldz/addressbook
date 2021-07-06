@@ -13,7 +13,7 @@ namespace AddressBook.Contacts.DataAccess.Abstract
 {
     public interface IContactDataAccess : IRepository<Contact>
     {
-        Task<bool> CreateContact(AddressBookCreateRequest request);
+        Task<AddressBookCreateViewModel> CreateContact(AddressBookCreateRequest request);
         Task<bool> DeleteContactAndContactInfo(string id);
         Task<List<ContactListViewModel>> GetAllWithContactInfo();
     }

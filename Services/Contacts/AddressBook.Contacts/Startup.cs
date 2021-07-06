@@ -4,6 +4,7 @@ using AddressBook.Contacts.DataAccess.Context.EntityFramework;
 using AddressBook.Contacts.Services.Abstract;
 using AddressBook.Contacts.Services.Concrete;
 using AddressBook.Contacts.Services.Mapper.AutoMapper;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,19 @@ namespace AddressBook.Contacts
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(Configuration["RabbitMQUrl"], "/", host =>
+                    {
+                        host.Username("guest");
+                        host.Password("guest");
+                    });
+                });
+
+            });
+            services.AddMassTransitHostedService();
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
             services.AddScoped<IContactService, ContactManager>();
             services.AddScoped<IContactDataAccess, ContactDataAccess>();

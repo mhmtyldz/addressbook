@@ -1,5 +1,7 @@
 ﻿using AddressBook.Contacts.Services.Abstract;
+using AddressBook.Shared.Messages;
 using AddressBook.Shared.Models.Request;
+using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,15 +17,30 @@ namespace AddressBook.Contacts.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IContactInfoService _contactInfoService;
-        public ContactsController(IContactService contactService, IContactInfoService contactInfoService)
+        private readonly ISendEndpointProvider _sendEndpointProvider;
+        public ContactsController(IContactService contactService, IContactInfoService contactInfoService, ISendEndpointProvider sendEndpointProvider)
         {
             _contactService = contactService;
             _contactInfoService = contactInfoService;
+            _sendEndpointProvider = sendEndpointProvider;
         }
         [HttpPost]
         public async Task<IActionResult> Create(AddressBookCreateRequest request)
         {
-            return Ok(await _contactService.Create(request));
+            var response = false;
+            var result = await _contactService.Create(request);
+            if (!string.IsNullOrEmpty(result.ContactId))
+            {
+                //rabbitmq publish process
+                var sendEndPoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:people-at-location"));
+                var numberOfAtThatLocationCommand = new NumberOfPeopleAtThatLocationCommand();
+                numberOfAtThatLocationCommand.ContactId = result.ContactId;
+                numberOfAtThatLocationCommand.LocationId = result.LocationId;
+                numberOfAtThatLocationCommand.ProcessType = ProcessType.ContactCreated;
+                await sendEndPoint.Send(numberOfAtThatLocationCommand);
+                response = true;
+            }
+            return Ok(response);
         }
         [HttpPut]
         public async Task<IActionResult> Update(UpdateContactRequest request)
