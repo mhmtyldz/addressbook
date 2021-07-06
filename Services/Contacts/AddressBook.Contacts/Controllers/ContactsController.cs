@@ -50,7 +50,17 @@ namespace AddressBook.Contacts.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            return Ok(await _contactService.Delete(id));
+            var result = await _contactService.Delete(id);
+            if (result)
+            {
+                var sendEndPoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:people-at-location"));
+                var numberOfAtThatLocationCommand = new NumberOfPeopleAtThatLocationCommand();
+                numberOfAtThatLocationCommand.ContactId = id;
+                numberOfAtThatLocationCommand.ProcessType = ProcessType.ContactDeleted;
+                await sendEndPoint.Send(numberOfAtThatLocationCommand);
+                result = true;
+            }
+            return Ok(result);
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
