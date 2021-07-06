@@ -14,9 +14,11 @@ namespace AddressBook.Contacts.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly IContactService _contactService;
-        public ContactsController(IContactService contactService)
+        private readonly IContactInfoService _contactInfoService;
+        public ContactsController(IContactService contactService, IContactInfoService contactInfoService)
         {
             _contactService = contactService;
+            _contactInfoService = contactInfoService;
         }
         [HttpPost]
         public async Task<IActionResult> Create(AddressBookCreateRequest request)
@@ -42,6 +44,11 @@ namespace AddressBook.Contacts.Controllers
         public async Task<IActionResult> GetContact(string id)
         {
             return Ok(await _contactService.GetContact(id));
+        }
+        [Route("contactinfo/{id}")]
+        public async Task<IActionResult> GetContactInfo(string id)
+        {
+            return Ok(await _contactInfoService.GetContactInfo(id));
         }
     }
 }

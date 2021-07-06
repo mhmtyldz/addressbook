@@ -35,6 +35,8 @@ namespace AddressBook.Contacts
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
             services.AddScoped<IContactService, ContactManager>();
             services.AddScoped<IContactDataAccess, ContactDataAccess>();
+            services.AddScoped<IContactInfoService, ContactInfoManager>();
+            services.AddScoped<IContactInfoDataAccess, ContactInfoDataAccess>();
             services.AddScoped<IFirmService, FirmManager>();
             services.AddScoped<IFirmDataAccess, FirmDataAccess>();
             services.AddScoped<ILocationService, LocationManager>();

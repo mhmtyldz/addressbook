@@ -37,6 +37,8 @@ namespace AddressBook.UI.Controllers
         [Route("/contact/list")]
         public async Task<IActionResult> List()
         {
+            var locations = await _contactService.GetLocationList();
+            ViewBag.Locations = locations;
             var result = await _contactService.GetContactList();
             return View(result);
         }
@@ -57,6 +59,24 @@ namespace AddressBook.UI.Controllers
         public async Task<IActionResult> UpdateContact(UpdateContactRequest request)
         {
             var result = await _contactService.UpdateContact(request);
+            return Json(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ContactInfoDetail(string id)
+        {
+            var result = await _contactService.ContactInfoDetail(id);
+            return Json(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateContactInfo(UpdateContactInfoRequest request)
+        {
+            var result = await _contactService.UpdateContactInfo(request);
+            return Json(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteContactInfo(int id)
+        {
+            var result = await _contactService.DeleteContactInfo(id);
             return Json(result);
         }
     }

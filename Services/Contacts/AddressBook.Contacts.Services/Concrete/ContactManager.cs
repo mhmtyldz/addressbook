@@ -43,7 +43,7 @@ namespace AddressBook.Contacts.Services.Concrete
             var contact = await _contactDataAccess.FindAsync(x => x.Uuid == guid);
             return _mapper.Map<ContactDetailViewModel>(contact.Entity);
         }
-
+        
         public async Task<bool> Update(UpdateContactRequest request)
         {
             var result = false;

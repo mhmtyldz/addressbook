@@ -81,10 +81,21 @@ namespace AddressBook.Contacts.DataAccess.Concrete
                 {
                     var uuid = Guid.Parse(id);
                     var contactInfo = await _context.ContactInformation.FirstOrDefaultAsync(x => x.ContactId == uuid);
-                    var deletedContactInfo = _context.ContactInformation.Remove(contactInfo);
-                    
-                    await _context.SaveChangesAsync();
-                    if (deletedContactInfo != null && deletedContactInfo.Entity != null)
+                    if (contactInfo!=null)
+                    {
+                        var deletedContactInfo = _context.ContactInformation.Remove(contactInfo);
+
+                        await _context.SaveChangesAsync();
+                        if (deletedContactInfo != null && deletedContactInfo.Entity != null)
+                        {
+                            var contact = await _context.Contact.FirstOrDefaultAsync(x => x.Uuid == uuid);
+                            var deletedContact = _context.Contact.Remove(contact);
+                            await _context.SaveChangesAsync();
+                            transaction.Commit();
+                            result = true;
+                        }
+                    }
+                    else
                     {
                         var contact = await _context.Contact.FirstOrDefaultAsync(x => x.Uuid == uuid);
                         var deletedContact = _context.Contact.Remove(contact);
@@ -92,6 +103,7 @@ namespace AddressBook.Contacts.DataAccess.Concrete
                         transaction.Commit();
                         result = true;
                     }
+                   
 
                 }
                 catch (Exception ex)

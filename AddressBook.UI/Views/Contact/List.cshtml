@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var locations = ViewBag.Locations as List<LocationListViewModel>;
 }
 
 <link href="~/assets/css/table.css" rel="stylesheet" />
@@ -44,6 +45,7 @@
                         <th>Location </th>
                         <th>Update </th>
                         <th>Delete</th>
+                        <th>Contact Info</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +61,7 @@
                                 <td>@contact.Location</td>
                                 <td><button onclick="getDetail('@contact.Id')" class="btn btn-primary btn-xs">Update</button></td>
                                 <td><button onclick="deleteContact('@contact.Id')" class="btn btn-danger btn-xs">Delete</button></td>
+                                <td><button onclick="contactInfoDetail('@contact.Id')" class="btn btn-warning btn-xs">Contact Info</button></td>
                             </tr>
                         }
                     }
@@ -94,12 +97,58 @@
 
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="contactInfoModalCenter" tabindex="-1" role="dialog" aria-labelledby="contactInfoModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactInfoModalLongTitle">Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="form-control" id="Id" value="" />
+                <input type="hidden" class="form-control" id="ContactId" value="" />
+                <div id="detail-summary">
+                    <div class="form-group col-md-12">
+                        <label class="text-fader">Location</label>
+                        <select class="form-control" name="LocationId" id="LocationId" data-provide="selectpicker">
+                            @foreach (var location in locations)
+                            {
+                                <option value="@location.Id">@location.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Email Address</label>
+                        <input type="text" class="form-control" id="EmailAddress" value="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Phone Number</label>
+                        <input type="text" class="form-control" id="PhoneNumber" value="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Content Of Info</label>
+                        <textarea class="form-control" id="ContentOfInfo" value=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-danger  pull-left" id="contactInfoDelete">Delete</button>
+                        <button class="btn btn-success  pull-right" id="contactInfoSave">Update</button>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 @section Scripts{
     <script>
         function deleteContact(id) {
@@ -140,6 +189,7 @@
                 url: '/Contact/GetDetail?id=' + id,
                 type: 'GET',
                 success: function (data) {
+
                     if (data != null) {
                         $('#Id').val(data.uuid);
                         $('#Name').val(data.name);
@@ -164,7 +214,43 @@
             });
 
         }
+        function contactInfoDetail(id) {
+            $('#Id').val("");
+            $('#PhoneNumber').val("");
+            $('#EmailAddress').val("");
+            $('#ContentOfInfo').val("");
+            $('#contactInfoModalCenter').modal('show');
+            $.ajax({
+                url: '/Contact/ContactInfoDetail?id=' + id,
+                type: 'GET',
+                success: function (data) {
 
+                    if (data != null) {
+                        $('#ContactId').val(data.contactId);
+                        $('#Id').val(data.id);
+                        $('#LocationId').val(data.locationId);
+                        $('#PhoneNumber').val(data.phoneNumber);
+                        $('#EmailAddress').val(data.emailAddress);
+                        $('#ContentOfInfo').val(data.contentOfInfo);
+                    }
+                    else {
+                        Swal.fire(
+                            'Hata!',
+                            'Error.',
+                            'error'
+                        )
+                    }
+
+                },
+                error: function (hata) {
+                    Swal.fire(
+                        'Hata!',
+                        'Genel hata.Lütfen admine başvurunuz',
+                        'error'
+                    )
+                }
+            });
+        }
         $('#contactSave').on('click', function () {
             var name = $('#Name').val();
             var lastName = $('#Lastname').val();
@@ -174,6 +260,7 @@
                 type: 'POST',
                 data: { id: id, name: name, lastName: lastName },
                 success: function (data) {
+                    $('#exampleModalCenter').modal('hide');
                     if (data) {
                         Swal.fire(
                             'Success!',
@@ -191,6 +278,94 @@
 
                 },
                 error: function (hata) {
+                    $('#exampleModalCenter').modal('hide');
+                    Swal.fire(
+                        'Hata!',
+                        'Genel hata.Lütfen admine başvurunuz',
+                        'error'
+                    )
+                }
+            });
+        })
+        $('#contactInfoSave').on('click', function () {
+            var contactId = $('#ContactId').val();
+            var id = $('#Id').val();
+            var locationId = $('#LocationId').val();
+            var phoneNumber = $('#PhoneNumber').val();
+            var emailAddress = $('#EmailAddress').val();
+            var contentOfInfo = $('#ContentOfInfo').val();
+
+            if (locationId == "" || phoneNumber == ""
+                || emailAddress == "" || contentOfInfo == "") {
+                Swal.fire(
+                    'Error!',
+                    'Fill in the required fields.',
+                    'error'
+                )
+                return;
+            }
+            else {
+                $.ajax({
+                    url: '/Contact/UpdateContactInfo',
+                    type: 'POST',
+                    data: { id: id, locationId: locationId, phoneNumber: phoneNumber, emailAddress: emailAddress, contentOfInfo: contentOfInfo, contactId: contactId },
+                    success: function (data) {
+                        $('#contactInfoModalCenter').modal('hide');
+                        if (data) {
+                            Swal.fire(
+                                'Success!',
+                                'Data was updated.',
+                                'success'
+                            )
+                            location.reload();
+                        }
+                        else {
+                            Swal.fire(
+                                'Error!',
+                                'Güncelleme işlemi gerçekleşmedi.',
+                                'error'
+                            )
+                        }
+
+                    },
+                    error: function (hata) {
+                        $('#contactInfoModalCenter').modal('hide');
+                        Swal.fire(
+                            'Hata!',
+                            'Genel hata.Lütfen admine başvurunuz',
+                            'error'
+                        )
+                    }
+                });
+            }
+
+        })
+        $('#contactInfoDelete').on('click', function () {
+            var id = $('#Id').val();
+            $.ajax({
+                url: '/Contact/DeleteContactInfo?id=' + id,
+                type: 'GET',
+                success: function (data) {
+                    $('#exampleModalCenter').modal('hide');
+                    if (data) {
+                        Swal.fire(
+                            'Success!',
+                            'Data was deleted.',
+                            'success'
+                        )
+                        location.reload();
+                    }
+                    else {
+                        Swal.fire(
+                            'Error!',
+                            'Something was wrong.',
+                            'error'
+                        )
+                    }
+
+                },
+                error: function (hata) {
+                    $('#exampleModalCenter').modal('hide');
                     Swal.fire(
                         'Hata!',
                         'Genel hata.Lütfen admine başvurunuz',
