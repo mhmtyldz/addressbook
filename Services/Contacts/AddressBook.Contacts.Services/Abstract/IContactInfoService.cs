@@ -12,6 +12,6 @@ namespace AddressBook.Contacts.Services.Abstract
     {
         Task<ContactInfoDetailViewModel> GetContactInfo(string id);
         Task<bool> Update(UpdateContactInfoRequest request);
-        Task<bool> DeleteContactInfo(int id);
+        Task<DeleteContactInfoViewModel> DeleteContactInfo(int id);
     }
 }

@@ -19,12 +19,11 @@ namespace AddressBook.Reports.Controllers
         {
             _numberOfPeopleService = numberOfPeopleService;
         }
-        [HttpPost]
-        [Route("/api/[controller]/update-number-of-people")]
-        public async Task<IActionResult> Update(NumberOfPeopleAtThatLocationCommand request)
+        [Route("/api/[controller]/numberofinfo")]
+        public async Task<IActionResult> GetNumberOfSomethingInfo()
         {
-            //var result = _numberOfPeopleService.
-            return Ok();
+            var result = await _numberOfPeopleService.GetNumberOfSomethingInfo();
+            return Ok(result);
         }
     }
 }

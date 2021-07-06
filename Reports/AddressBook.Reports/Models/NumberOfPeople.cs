@@ -14,5 +14,6 @@ namespace AddressBook.Reports.Models
         public string Id { get; set; }
         public string ContactId { get; set; }
         public int LocationId { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

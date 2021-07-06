@@ -17,10 +17,10 @@ namespace AddressBook.UI.Extensions
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Contacts.Path}");
             });
-            //services.AddHttpClient<IReportService, ReportService>(opt =>
-            //{
-            //    opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Reports.Path}");
-            //});
+            services.AddHttpClient<IReportService, ReportService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Reports.Path}");
+            });
         }
 
     }

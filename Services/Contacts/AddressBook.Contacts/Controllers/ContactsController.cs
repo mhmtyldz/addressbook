@@ -36,6 +36,7 @@ namespace AddressBook.Contacts.Controllers
                 var numberOfAtThatLocationCommand = new NumberOfPeopleAtThatLocationCommand();
                 numberOfAtThatLocationCommand.ContactId = result.ContactId;
                 numberOfAtThatLocationCommand.LocationId = result.LocationId;
+                numberOfAtThatLocationCommand.PhoneNumber = request.PhoneNumber;
                 numberOfAtThatLocationCommand.ProcessType = ProcessType.ContactCreated;
                 await sendEndPoint.Send(numberOfAtThatLocationCommand);
                 response = true;

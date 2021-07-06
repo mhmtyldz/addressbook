@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddressBook.Shared.Messages
+namespace AddressBook.Shared.ViewModel
 {
-    public class NumberOfPeopleAtThatLocationCommand
+    public class DeleteContactInfoViewModel
     {
         public string ContactId { get; set; }
         public int LocationId { get; set; }
-        public string PhoneNumber { get; set; }
-        public ProcessType  ProcessType{ get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model NumberOfSomethingViewModel 
+@{
+    ViewData["Title"] = "Statistic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body">
+                @foreach (var numberOfPeople in Model.NumberOfPeople)
+                {
+                    <div class="flexbox">
+                        <div data-provide="sparkline" data-width="100" data-fill-color="false" data-line-width="2">@numberOfPeople.LocationName</div>
+                        <div class="text-right">
+                            <span class="fw-400">Count</span><br>
+                            <span>
+                                <i class="ti-angle-up text-success"></i>
+                                <span class="fs-18 ml-1">@numberOfPeople.Count</span>
+                            </span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-body">
+                <div class="flexbox">
+                    <div data-provide="sparkline" data-width="100" data-fill-color="false" data-line-width="2">The number of phone numbers in the address book at that location</div>
+                    <div class="text-right">
+                        <span class="fw-400">Count</span><br>
+                        <span>
+                            <i class="ti-angle-up text-success"></i>
+                            <span class="fs-18 ml-1">113</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

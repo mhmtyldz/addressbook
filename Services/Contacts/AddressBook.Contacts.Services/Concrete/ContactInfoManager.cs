@@ -22,16 +22,17 @@ namespace AddressBook.Contacts.Services.Concrete
             _mapper = mapper;
         }
 
-        public async Task<bool> DeleteContactInfo(int id)
+        public async Task<DeleteContactInfoViewModel> DeleteContactInfo(int id)
         {
-            bool result = false;
+            var result = new DeleteContactInfoViewModel();
             var contactInfo = await _contactInfoDataAccess.FindAsync(x => x.Id == id);
             if (contactInfo.Success && contactInfo.Entity != null)
             {
                 var deletedContactInfo = await _contactInfoDataAccess.DeleteAsync(contactInfo.Entity);
                 if (deletedContactInfo.Success)
                 {
-                    result = true;
+                    result.LocationId = contactInfo.Entity.LocationId;
+                    result.ContactId = contactInfo.Entity.ContactId.ToString();
                 }
             }
             return result;

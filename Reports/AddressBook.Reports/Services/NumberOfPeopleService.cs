@@ -2,6 +2,7 @@
 using AddressBook.Reports.Services.Interfaces;
 using AddressBook.Reports.Settings;
 using AddressBook.Shared.Messages;
+using AddressBook.Shared.ViewModel;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -21,36 +22,80 @@ namespace AddressBook.Reports.Services
             _numberOfPeopleCollection = database.GetCollection<NumberOfPeople>(databaseSettings.NumberOfPeopleCollectionName);
         }
 
-        public async Task<bool> Update(NumberOfPeopleAtThatLocationCommand numberOfPeopleCommand)
+        public async Task<NumberOfSomethingViewModel> GetNumberOfSomethingInfo()
         {
-            var result = false;
+            var result = await _numberOfPeopleCollection.Find(x => true).ToListAsync();
+
+            var numberOfPeoples = result.GroupBy(x => x.LocationId).Select(x => new NumberOfPeopleViewModel
+            {
+                LocationId = x.Key,
+                Count = x.Count()
+            }).ToList();
+
+            var numberOfPhoneNumbers = result.Where(x => !string.IsNullOrEmpty(x.PhoneNumber)).GroupBy(x => x.LocationId).Select(x => new NumberOfPhoneNumberViewModel
+            {
+                LocationId = x.Key,
+                Count = x.Count()
+            }).ToList();
+
+            var response = new NumberOfSomethingViewModel
+            {
+                NumberOfPeople = numberOfPeoples,
+                NumberOfPhoneNumber = numberOfPhoneNumbers
+            };
+            return response;
+        }
+
+        public async Task Update(NumberOfPeopleAtThatLocationCommand numberOfPeopleCommand)
+        {
             try
             {
+                //:TODO Çok fazla kod tekrarı var. Zaman kalırsa Düzeltilecek. 
                 switch (numberOfPeopleCommand.ProcessType)
                 {
                     case ProcessType.ContactCreated:
+                        var numberOfPeople = new NumberOfPeople
+                        {
+                            ContactId = numberOfPeopleCommand.ContactId,
+                            LocationId = numberOfPeopleCommand.LocationId,
+                            PhoneNumber = numberOfPeopleCommand.PhoneNumber
+                        };
+                        await _numberOfPeopleCollection.InsertOneAsync(numberOfPeople);
+                        break;
+                    case ProcessType.ContactDeleted:
+                        var deletedNumberOf = await _numberOfPeopleCollection.FindOneAndDeleteAsync(x => x.ContactId == numberOfPeopleCommand.ContactId.ToLower());
+                        break;
+                    case ProcessType.ContactInfoUpdated:
                         var numberOfPeopleRow = await _numberOfPeopleCollection.Find(x => x.ContactId == numberOfPeopleCommand.ContactId).FirstOrDefaultAsync();
                         if (numberOfPeopleRow != null)
                         {
                             numberOfPeopleRow.ContactId = numberOfPeopleCommand.ContactId;
                             numberOfPeopleRow.LocationId = numberOfPeopleCommand.LocationId;
+                            numberOfPeopleRow.PhoneNumber = numberOfPeopleCommand.PhoneNumber;
                             await _numberOfPeopleCollection.FindOneAndReplaceAsync(x => x.ContactId == numberOfPeopleCommand.ContactId, numberOfPeopleRow);
                         }
                         else
                         {
-                            var numberOfPeople = new NumberOfPeople
+                            var numberOfPeople3 = new NumberOfPeople
                             {
                                 ContactId = numberOfPeopleCommand.ContactId,
-                                LocationId = numberOfPeopleCommand.LocationId
+                                LocationId = numberOfPeopleCommand.LocationId,
+                                PhoneNumber = numberOfPeopleCommand.PhoneNumber
                             };
-                            await _numberOfPeopleCollection.InsertOneAsync(numberOfPeople);
+                            await _numberOfPeopleCollection.InsertOneAsync(numberOfPeople3);
                         }
-                        result = true;
                         break;
-                    case ProcessType.ContactDeleted:
-                        var deletedNumberOf = await _numberOfPeopleCollection.FindOneAndDeleteAsync(x => x.ContactId == numberOfPeopleCommand.ContactId.ToLower());
-                        if (deletedNumberOf != null)
-                            result = true;
+                    case ProcessType.ContactInfoDeleted:
+                        var deletedNumberOf2 = await _numberOfPeopleCollection.FindOneAndDeleteAsync(x => x.ContactId == numberOfPeopleCommand.ContactId.ToLower());
+                        break;
+                    case ProcessType.ContactInfoCreated:
+                        var numberOfPeople2 = new NumberOfPeople
+                        {
+                            ContactId = numberOfPeopleCommand.ContactId,
+                            LocationId = numberOfPeopleCommand.LocationId,
+                            PhoneNumber = numberOfPeopleCommand.PhoneNumber
+                        };
+                        await _numberOfPeopleCollection.InsertOneAsync(numberOfPeople2);
                         break;
                     default:
                         break;
@@ -59,12 +104,8 @@ namespace AddressBook.Reports.Services
             }
             catch (Exception ex)
             {
-
-                result = false;
-
+                throw;
             }
-
-            return result;
         }
     }
 }
