@@ -73,6 +73,7 @@ namespace AddressBook.Contacts.Controllers
         {
             return Ok(await _contactService.GetContact(id));
         }
+        [HttpGet]
         [Route("contactinfo/{id}")]
         public async Task<IActionResult> GetContactInfo(string id)
         {

@@ -19,8 +19,8 @@ namespace AddressBook.Reports.Controllers
         {
             _numberOfPeopleService = numberOfPeopleService;
         }
-        [Route("/api/[controller]/numberofinfo")]
-        public async Task<IActionResult> GetNumberOfSomethingInfo()
+        [HttpGet]
+        public async Task<IActionResult> GetNumberInfo()
         {
             var result = await _numberOfPeopleService.GetNumberOfSomethingInfo();
             return Ok(result);

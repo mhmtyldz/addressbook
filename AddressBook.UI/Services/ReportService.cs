@@ -19,7 +19,7 @@ namespace AddressBook.UI.Services
 
         public async  Task<NumberOfSomethingViewModel> GetNumberOfSomethingInfo()
         {
-            var response = await _httpClient.GetAsync($"reports/numberofinfo");
+            var response = await _httpClient.GetAsync($"https://localhost:5012/api/reports");
 
             if (!response.IsSuccessStatusCode)
             {
